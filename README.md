@@ -1,5 +1,7 @@
 # hey, mark!
 
+<img width="512" height="512" alt="icon-full_backup" src="https://github.com/user-attachments/assets/55a57fc4-6a7b-4010-be2c-a1513918ee53" />
+
 **hey, mark!**는 Tauri와 React로 구축된 현대적이고 가벼운 프리미엄 마크다운 에디터이자 뷰어입니다.
 
 ## 주요 특징
@@ -8,9 +10,12 @@
 - **지능적인 보조**: OpenAI, Claude, Gemini 및 로컬 LLM 연동을 통한 인공지능 글쓰기 보조 기능.
 - **타이포그래피 최적화**: 사용자의 가독성을 위해 자간, 행간, 장평을 실시간으로 조절할 수 있습니다.
 
+<img width="1200" alt="image" src="https://github.com/user-attachments/assets/c6ada1a4-e09d-4b05-9453-5a7a0fd7253b" />
+
+
 ## 시작하기
 1. 프로그램을 실행합니다.
-2. `Open Vault`를 클릭하여 마크다운 파일이 포함된 폴더를 선택합니다.
+2. `Open Vault` 혹은'Open file' 을  클릭하여 마크다운 파일이 포함된 폴더 혹은 파일을 선택합니다.
 3. 왼쪽 탐색기에서 파일을 선택하여 읽거나 편집합니다.
 
 ## 기술 스택
@@ -29,11 +34,15 @@
 - **Shiki 엔진 탑재**: 화려하고 정확한 구문 강조(Syntax Highlighting)를 제공합니다.
 - **고성능 렌더링**: Markdown-it을 기반으로 한 빠르고 정확한 마크다운 파싱.
 - **이미지 최적화**: WebP 형식을 지원하여 이미지 로딩 속도를 극대화했습니다.
+- **멀티 폴더 지원**: 여러 폴더 관리를 지원합니다.
+
+
+<img width="2103" height="1403" alt="image" src="https://github.com/user-attachments/assets/00d83112-eb14-4c5e-a4ec-ab231f53de26" />
 
 ### 2. 마크다운 에디터 (Markdown Editor)
 - **CodeMirror 기반**: 코드 편집기 수준의 강력한 편집 경험을 제공합니다.
 - **실시간 편집 및 저장**: 수정 사항을 즉시 반영하고 안전하게 저장합니다.
-- **자동 저장**: 문서 작업 중 데이터 손실을 방지합니다.
+- **이미지 삽입 및 저장**: 해당 파일이 있는 폴더에 /assets 을 만들고 복사해서 저장합니다.
 
 ### 3. 문서 및 프로젝트 관리
 - **탭 시스템**: 여러 문서를 동시에 열고 전환할 수 있는 직관적인 탭 인터페이스.
@@ -50,6 +59,8 @@
 - **다크/라이트 모드**: 주변 환경에 맞춰 테마를 전환할 수 있습니다.
 - **스킨 시스템**: UI 전반의 분위기를 바꿀 수 있는 스킨 설정을 지원합니다.
 
+<img width="1230" height="689" alt="image" src="https://github.com/user-attachments/assets/c2b1630a-27f6-42d4-a247-601cb7301fd7" />
+<img width="1536" height="945" alt="image" src="https://github.com/user-attachments/assets/e1f8d162-543c-4689-b09e-34eb954224f8" />
 ### 5. AI 글쓰기 어시스턴트
 - **플로팅 AI 메뉴**: 텍스트 선택 시 나타나는 전용 메뉴를 통해 다음 작업을 수행합니다.
     - **문장 다듬기(Refine)**: 더욱 매끄러운 문장으로 개선합니다.
