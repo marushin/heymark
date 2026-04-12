@@ -61,6 +61,7 @@
 
 <img width="1230" height="689" alt="image" src="https://github.com/user-attachments/assets/c2b1630a-27f6-42d4-a247-601cb7301fd7" />
 <img width="1536" height="945" alt="image" src="https://github.com/user-attachments/assets/e1f8d162-543c-4689-b09e-34eb954224f8" />
+
 ### 5. AI 글쓰기 어시스턴트
 - **플로팅 AI 메뉴**: 텍스트 선택 시 나타나는 전용 메뉴를 통해 다음 작업을 수행합니다.
     - **문장 다듬기(Refine)**: 더욱 매끄러운 문장으로 개선합니다.
