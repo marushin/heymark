@@ -39,6 +39,13 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # `tauri build` refuses mismatched npm and Rust packages, but `tauri info` exits 0 on them.
+      - name: Check Tauri package versions
+        shell: bash
+        run: |
+          npx tauri info 2>&1 | tee tauri-info.log
+          ! grep -q "version mismatched" tauri-info.log
+
       - name: Type-check and build frontend
         run: npm run build
 
