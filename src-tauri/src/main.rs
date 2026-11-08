@@ -198,6 +198,7 @@ fn main() {
         .plugin(tauri_plugin_store::Builder::new().build())
         .plugin(tauri_plugin_shell::init())
         .plugin(tauri_plugin_dialog::init())
+        .plugin(tauri_plugin_http::init())
         .plugin(tauri_plugin_single_instance::init(|app, argv, cwd| {
             // When a second instance is opened, send its arguments to the first instance,
             // resolved against the second instance's working directory, and bring the window up.
