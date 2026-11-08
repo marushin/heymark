@@ -74,7 +74,7 @@ export interface LlmSlice {
 
 export const createLlmSlice: StateCreator<VaultState, [], [], LlmSlice> = (set, get) => ({
   llmConfigs: {
-    local: { provider: 'local', endpoint: "http://127.0.0.1:9821", apiKey: "", model: "google/gemma-4-26b-a4b" },
+    local: { provider: 'local', endpoint: "http://127.0.0.1:1234", apiKey: "", model: "google/gemma-4-26b-a4b" },
     openai: { provider: 'openai', endpoint: "https://api.openai.com/v1", apiKey: "", model: "gpt-4o" },
     claude: { provider: 'claude', endpoint: "https://api.anthropic.com/v1", apiKey: "", model: DEFAULT_CLAUDE_MODEL },
     gemini: { provider: 'gemini', endpoint: "https://generativelanguage.googleapis.com/v1", apiKey: "", model: "gemini-3.1-pro" }

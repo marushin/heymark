@@ -107,7 +107,7 @@ export const SettingsModal: React.FC = () => {
                   className="text-input"
                   value={currentConfig.endpoint}
                   onChange={(e) => setLlmConfig(selectedProvider, { endpoint: e.target.value })}
-                  placeholder="http://127.0.0.1:39080"
+                  placeholder="http://127.0.0.1:1234"
                 />
               </div>
             )}
