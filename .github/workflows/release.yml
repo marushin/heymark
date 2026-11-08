@@ -1,0 +1,105 @@
+name: Release
+
+# Run by hand from main. It builds a draft release; GitHub creates the version
+# tag only when the draft is published, so a failed test never leaves a bad tag.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  create-draft:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    outputs:
+      release_id: ${{ steps.draft.outputs.release_id }}
+      tag: ${{ steps.draft.outputs.tag }}
+      version: ${{ steps.draft.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create or update the draft release
+        id: draft
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          VERSION=$(node -p "require('./src-tauri/tauri.conf.json').version")
+          TAG="v$VERSION"
+
+          if git ls-remote --exit-code --tags origin "refs/tags/$TAG" > /dev/null; then
+            echo "::error::$TAG is already released. Bump the version first."
+            exit 1
+          fi
+
+          if gh release view "$TAG" > /dev/null 2>&1; then
+            gh release edit "$TAG" --draft --target "$GITHUB_SHA"
+          else
+            gh release create "$TAG" --draft --target "$GITHUB_SHA" \
+              --title "hey, mark! $TAG" --notes "Draft build from $GITHUB_SHA"
+          fi
+
+          ID=$(gh release view "$TAG" --json databaseId -q .databaseId)
+          {
+            echo "release_id=$ID"
+            echo "tag=$TAG"
+            echo "version=$VERSION"
+          } >> "$GITHUB_OUTPUT"
+
+  build:
+    needs: create-draft
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 45
+    permissions:
+      contents: write
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-latest
+            target: aarch64-apple-darwin # Apple Silicon only
+          - os: windows-latest
+            target: x86_64-pc-windows-msvc
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
+
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: src-tauri -> target
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build and upload bundles
+        uses: tauri-apps/tauri-action@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          releaseId: ${{ needs.create-draft.outputs.release_id }}
+          args: --target ${{ matrix.target }}
+
+      - name: Upload Windows portable exe
+        if: runner.os == 'Windows'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ needs.create-draft.outputs.tag }}
+          VERSION: ${{ needs.create-draft.outputs.version }}
+          TARGET: ${{ matrix.target }}
+        run: |
+          set -euo pipefail
+          PORTABLE="heymark_${VERSION}_portable.exe"
+          cp "src-tauri/target/$TARGET/release/heymark.exe" "$PORTABLE"
+          gh release upload "$TAG" "$PORTABLE" --clobber
