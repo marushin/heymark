@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { useVaultStore } from '../store/useVaultStore';
+import { llmFetch } from '../lib/llmFetch';
 import { Loader2, Wand2, Languages, Sparkles, X } from 'lucide-react';
 
 interface Position {
@@ -124,7 +125,7 @@ export const AIFloatingMenu = <S,>({
         });
       }
 
-      const response = await fetch(url, options);
+      const response = await llmFetch(activeLlmId, url, options);
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));

@@ -17,6 +17,7 @@
     "@milkdown/react": "^7.21.3",
     "@tauri-apps/api": "^2.1.0",
     "@tauri-apps/plugin-dialog": "^2.7.0",
+    "@tauri-apps/plugin-http": "~2.5.0",
     "@tauri-apps/plugin-shell": "^2.1.0",
     "@tauri-apps/plugin-store": "^2.4.2",
     "dompurify": "^3.4.17",

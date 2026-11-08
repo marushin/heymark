@@ -1,6 +1,7 @@
 import { StateCreator } from "zustand";
 import { LlmProvider, LlmConfig, VaultState } from "./useVaultStore";
 import { setStoreValue } from "../lib/tauriStore";
+import { llmFetch } from "../lib/llmFetch";
 
 // Current Anthropic model IDs (F-20). The first entry is the default.
 export const DEFAULT_CLAUDE_MODEL = "claude-sonnet-5-5";
@@ -148,7 +149,7 @@ export const createLlmSlice: StateCreator<VaultState, [], [], LlmSlice> = (set, 
         return;
       }
 
-      const response = await fetch(url, {
+      const response = await llmFetch(activeLlmId, url, {
         method: "GET",
         headers,
         signal: controller.signal
@@ -193,7 +194,7 @@ export const createLlmSlice: StateCreator<VaultState, [], [], LlmSlice> = (set, 
 
       if (!url) return;
 
-      const response = await fetch(url, { headers });
+      const response = await llmFetch(provider, url, { headers });
       if (!response.ok) throw new Error("Failed to fetch models");
 
       const data = await response.json();
