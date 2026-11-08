@@ -1,0 +1,30 @@
+[package]
+name = "heymark"
+version = "2.1.1"
+
+description = "A lightweight Markdown reader"
+authors = ["hey, mark! Team"]
+edition = "2021"
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = ["protocol-asset"] }
+tauri-plugin-shell = "2"
+tauri-plugin-dialog = "2"
+tauri-plugin-single-instance = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tauri-plugin-store = "2"
+
+[[bin]]
+name = "heymark"
+path = "src/main.rs"
+
+[profile.release]
+panic = "abort"      # Reduce binary size by removing panic unwinding
+codegen-units = 1    # More aggressive optimizations
+lto = true           # Link Time Optimization
+opt-level = "z"      # Optimize specifically for size
+strip = true         # Strip symbols from binary

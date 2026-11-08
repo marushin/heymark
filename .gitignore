@@ -1,0 +1,35 @@
+# Dependencies and build output
+node_modules/
+dist/
+src-tauri/target/
+src-tauri/gen/
+releases/
+*.tsbuildinfo
+
+# Reports and review notes (kept locally only)
+report/
+_to_delete_*/
+
+# Design originals (not used by the build)
+*.psd
+option2_heymark_icon_*.png
+src-tauri/icons/ICON_0410.png
+src-tauri/icons/icon-full_backup.png
+
+# Secrets and signing keys
+.env
+.env.*
+*.key
+*.pem
+
+# Editor temp files and logs
+*.heymark-tmp
+*.log
+
+# OS and sync clients
+.DS_Store
+Thumbs.db
+desktop.ini
+@eaDir/
+#recycle/
+.SynologyWorkingDirectory/
