@@ -1,6 +1,6 @@
 [package]
 name = "heymark"
-version = "2.1.1"
+version = "2.2.0"
 
 description = "A lightweight Markdown reader"
 authors = ["hey, mark! Team"]
